@@ -1,0 +1,37 @@
+<!--home.html-->
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load static %}
+{% block content %}
+<div class="main">
+          <h1 class="page-header">设备查询</h1>
+
+          <div class="row placeholders">
+            <a href="/.." > <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="{% static "repair.png" %}" >
+              <h3>查询维修设备</h3>
+              <span class="text-muted">查询哪些设备正在维修</span>
+            </div></a>
+            <a href="/.." ><div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "lend.png" %}">
+              <h3>查询借用设备</h3>
+              <span class="text-muted">查询哪些设备已被借用</span>
+            </div> </a>
+            <a href="/.." ><div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "discard.png" %}">
+            <h3>查询报废设备</h3>
+              <span class="text-muted">查询哪些设备已经报废</span>
+            </div></a>
+            <a href="/.." ><div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "manage.png" %}">
+            <h3>查询申请</h3>
+              <span class="text-muted">查询已被处理过的申请</span>
+            </div></a>
+          </div>
+
+          <h2 class="sub-header">设备列表</h2>
+          <div class="table-responsive">
+            {% render_table devices %}
+            </div><!-- /.blog-post -->
+        </div>
+{% endblock %}
