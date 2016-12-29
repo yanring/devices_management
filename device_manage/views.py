@@ -25,6 +25,7 @@ def index(request):
 
 
 def add_device(request):
+    target_url = 'device_manage/add_device.html'
     if request.method == 'POST':
         uf = UserFormRegist(request.POST)
         login_flag = False
@@ -39,30 +40,66 @@ def add_device(request):
             test = 'test'
             print(user)
             # 添加到数据库
-
-
             try:
                 print(Device.objects.create(user=user, state=state, deviceName=deviceName, department=department))
                 print("check")
                 success = True
                 print(test)
                 test = 'test2'
-                return render(request,'device_manage/add_device.html', locals())
+                return render(request,target_url, locals())
             except Exception as e:
                 login_flag = False
                 error = True
                 print(e)
                 test = 'test'
                 error_info = e
-                return render(request,'device_manage/add_device.html',
+                return render(request,target_url,
                               {'uf': uf, 'error': error, 'error_info': error_info, 'test': test})
 
 
 
         else:
-            return render(request,'device_manage/add_device.html', {'uf': uf})
+            return render(request,target_url, {'uf': uf})
     uf = UserFormRegist()
-    return render(request, 'device_manage/add_device.html', {'uf': uf})
+    return render(request, target_url, {'uf': uf})
+def add_repair(request):
+    target_url= 'device_manage/add_repair.html'
+    if request.method == 'POST':
+        uf = UserFormRegist(request.POST)
+        login_flag = False
+        # print(type(req))
+        # print(req)
+        if uf.is_valid():
+            # 获得表单数据
+            user = uf.cleaned_data['User']
+            state = uf.cleaned_data['State']
+            deviceName = uf.cleaned_data['DeviceName']
+            department = uf.cleaned_data['Department']
+            test = 'test'
+            print(user)
+            # 添加到数据库
+            try:
+                print(Device.objects.create(user=user, state=state, deviceName=deviceName, department=department))
+                print("check")
+                success = True
+                print(test)
+                test = 'test2'
+                return render(request,target_url, locals())
+            except Exception as e:
+                login_flag = False
+                error = True
+                print(e)
+                test = 'test'
+                error_info = e
+                return render(request,target_url,
+                              {'uf': uf, 'error': error, 'error_info': error_info, 'test': test})
+
+
+
+        else:
+            return render(request,target_url, {'uf': uf})
+    uf = UserFormRegist()
+    return render(request, target_url, {'uf': uf})
 
 
 class BootStrapTable(tables.Table):
