@@ -28,8 +28,14 @@
               <span class="text-muted">查询已被处理过的申请</span>
             </div></a>
           </div>
+    <h1 class="page-header">搜索</h1>
+        <li>
+        <form class="pure-form" action="/search/" method="get">
+        <input class="pure-input-3-4" type="text" name="s" placeholder="search">
+        </form>
+        </li>
 
-          <h2 class="sub-header">设备列表</h2>
+          <h1 class="page-header">设备列表</h1>
           <div class="table-responsive">
             {% render_table devices %}
             </div><!-- /.blog-post -->

@@ -23,7 +23,7 @@ class Device(models.Model):
 
     # python2使用__unicode__, python3使用__str__
     def __unicode__(self):
-        return self.deviceName
+        return unicode(self.deviceId)
 
 
 class Repair(models.Model):
