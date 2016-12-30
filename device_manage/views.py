@@ -1,6 +1,7 @@
 # coding=utf-8
 import time
 from django import forms
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -213,11 +214,10 @@ def add_discard(request):
             try:
                 device_instance = Device.objects.get(deviceId=device_id)
                 print(Discard.objects.create(deviceId=device_instance, user=user, note=note, finished='NO',
-                                          date=date).__unicode__())
-
+                                             date=date).__unicode__())
                 print("check")
                 success = True
-                print(test)
+                print(type(Device.objects.all()))
                 test = 'test2'
                 return render(request, target_url, locals())
             except Exception as e:
@@ -235,6 +235,42 @@ def add_discard(request):
             return render(request, target_url, {'uf': uf})
     uf = AddDiscardForm()
     return render(request, target_url, {'uf': uf})
+
+
+def state_manage(request):
+    target_url = 'device_manage/state_manage.html'
+    lend_request_list = Lend.objects.filter(finished="NO")
+    repair_request_list = Repair.objects.filter(finished="NO")
+    discard_request_list = Discard.objects.filter(finished="NO")
+    return render(request, target_url, locals())
+
+
+def lend_manage(request,table,id,flag):
+    print (table)
+    print (id)
+    print (flag)
+    if table == "lend":
+        table_class = Lend
+        #print (table_class.objects.all().count())
+        if(flag == "agree"):
+            table_class.objects.filter(lendId=int(id)).update(finished='YES')
+        elif flag=="disagree":
+            table_class.objects.filter(lendId=int(id)).update(finished='DISAGREE')
+    elif(table == "discard"):
+        table_class = Discard
+        if (flag == "agree"):
+            table_class.objects.filter(discardId=int(id)).update(finished='YES')
+        elif flag == "disagree":
+            table_class.objects.filter(discardId=int(id)).update(finished='DISAGREE')
+    elif table == "repair":
+        table_class = Repair
+        if flag == "agree":
+            table_class.objects.filter(repairId=int(id)).update(finished='YES')
+            print 1
+        elif flag == "disagree":
+            table_class.objects.filter(repairId=int(id)).update(finished='DISAGREE')
+    return HttpResponseRedirect('/../device-manage/state-manage')
+    #return state_manage(request)
 
 
 class BootStrapTable(tables.Table):

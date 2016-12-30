@@ -6,47 +6,76 @@
 {% block content %}
 
 <div class="main">
-          <h1 class="page-header">设备管理-维修申请</h1>
+  <h1 class="page-header">处理借用申请</h1>
 
-          <div class="row placeholders">
+    {% for lend_request in lend_request_list %}
+        <section class="bs-callout bs-callout-info">
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ lend_request.deviceId }}</a></h3>
+                <h3 ><a href="">LendID : {{ lend_request.lendId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ lend_request.user }}</a>
+                    </p>
+{#            </header>#}
 
-            <a href="/device-manage/add-repair" > <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="{% static "repair.png" %}" >
-              <h3>提交设备维修</h3>
-              <span class="text-muted">提交维修申请</span>
-            </div></a>
-            <a href="/device-manage/add-lend" ><div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "lend.png" %}">
-              <h3>提交设备借用</h3>
-              <span class="text-muted">提交借用申请</span>
-            </div> </a>
-            <a href="/device-manage/add-discard" ><div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "discard.png" %}">
-            <h3>提交设备报废</h3>
-              <span class="text-muted">提交报废申请</span>
-            </div></a>
-            <a href="/device-manage/state-manage" ><div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="{% static "manage.png" %}">
-            <h3>管理设备状态变更</h3>
-              <span class="text-muted">处理各类申请</span>
-            </div></a>
-</div>
+                <div class="post-description">
+                    <p>
+                        Note:{{ lend_request.note }}
+                    </p>
+                </div>
+                <a name="agree1" onclick="confirm_agreee()"    class="btn btn-success" href="{% url "lend_manage" table="lend" id=lend_request.lendId flag="agree" %}">同意</a>
+                <a name="agree1" onclick="confirm_disagreee()" class="btn btn-danger" href="{% url "lend_manage" table="lend" id=lend_request.lendId flag="disagree" %}">拒绝</a>
+        </section>
+    {% endfor %}
+    <h1 class="page-header">处理维修申请</h1>
+    {% for request in repair_request_list %}
+        <section class="bs-callout bs-callout-warning">
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">RepairId : {{ request.repairId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                    </p>
+{#            </header>#}
 
-          <h1 class="page-header">添加维修申请</h1>
-          <div class="container center-block">
-            {% if error %}
-                <div class="alert alert-danger" role="alert">添加失败,错误信息 :  {{ error_info }} </div>
-            {% endif %}
-            {% if success %}
-                <div class="alert alert-success" role="alert">成功提交维修申请</div>
-            {% endif %}
-            <form class="form-signin" role="form" method = 'post' enctype="multipart/form-data">
-                {% csrf_token %}
-                {{uf.as_p}}
-                <button class="btn btn-primary " type="submit" style="width: 20%">提交</button>
-            </form>
-            <br>
+                <div class="post-description">
+                    <p>
+                        Note:{{ request.note }}
+                    </p>
+                </div>
+                <a name="agree2" onclick="confirm_agreee()" class="btn btn-success" href="{% url "lend_manage" table="repair" id=request.repairId flag="agree" %}">同意</a>
+                <a name="disagree2" onclick="confirm_disagreee()"  class="btn btn-danger" href="{% url "lend_manage" table="repair" id=request.repairId flag="disagree" %}">拒绝</a>
+        </section>
+    {% endfor %}
+<h1 class="page-header">处理报废申请</h1>
+    {% for request in discard_request_list %}
+        <div class="bs-callout bs-callout-danger" >
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">DiscardId : {{ request.DiscardId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                    </p>
+{#            </header>#}
 
-</div>
+                <div class="post-description">
+                    <p>
+                        Note:{{ request.note }}
+                    </p>
+                </div>
+                <a name="agree3" onclick="confirm_agreee()"  class="btn btn-success" href="{% url "lend_manage" table="discard" id=request.discardId flag="agree" %}">同意</a>
+                <a name="disagree3" onclick="confirm_disagreee()"  class="btn btn-danger" href="{% url "lend_manage" table="discard" id=request.discardId flag="disagree" %}">拒绝</a>
         </div>
+    {% endfor %}
+
+
+</div>
+<script>
+    function confirm_agreee() {
+         alert("确认成功");
+    }
+    function confirm_disagreee() {
+         alert("驳回成功");
+    }
+</script>
 {% endblock %}
