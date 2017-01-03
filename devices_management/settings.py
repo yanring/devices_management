@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'bootstrapform',
     'users',
+    'article',
 ]
 AUTH_USER_MODEL = 'users.User'
 MIDDLEWARE = [

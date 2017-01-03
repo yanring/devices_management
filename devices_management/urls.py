@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
+import article.views
 import device_home.views
 from device_query import views
 from devices_management import settings
@@ -28,6 +29,7 @@ urlpatterns = [
     url(r'^$', include('device_home.urls')),
     url(r'^accounts/', include('users.urls')),
     url(r'^profile/$', device_home.views.profile),
+    url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
 
 
 ]
