@@ -7,7 +7,13 @@
 
 <div class="main">
   <h1 class="page-header">处理借用申请</h1>
+{% if not user.is_superuser %}
+    <script language="javascript">
+        document.location = "/../device-manage/add-device";
+        alert("权限不足,请登录管理员账号");
+    </script>
 
+{% endif %}
     {% for lend_request in lend_request_list %}
         <section class="bs-callout bs-callout-info">
 {#            <header class="post-header">#}

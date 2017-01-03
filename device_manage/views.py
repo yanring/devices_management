@@ -59,6 +59,8 @@ def index(request):
 
 def add_device(request):
     target_url = 'device_manage/add_device.html'
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/../accounts/login/')
     if request.method == 'POST':
         uf = AddDeviceForm(request.POST)
         login_flag = False
@@ -99,6 +101,8 @@ def add_device(request):
 
 def add_repair(request):
     target_url = 'device_manage/add_repair.html'
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/../accounts/login/')
     if request.method == 'POST':
         uf = AddRepairForm(request.POST)
         login_flag = False
@@ -146,8 +150,11 @@ def add_repair(request):
 
 def add_lend(request):
     target_url = 'device_manage/add_lend.html'
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/../accounts/login/')
     if request.method == 'POST':
         uf = AddLendForm(request.POST)
+
         login_flag = False
         # print(type(req))
         # print(req)
@@ -193,7 +200,10 @@ def add_lend(request):
 
 def add_discard(request):
     target_url = 'device_manage/add_discard.html'
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/../accounts/login/')
     if request.method == 'POST':
+
         uf = AddDiscardForm(request.POST)
         login_flag = False
         # print(type(req))
@@ -255,15 +265,15 @@ def lend_manage(request,table,id,flag):
         if(flag == "agree"):
             table_class.objects.filter(lendId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(lendId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(id)).update(state='landed')
+            Device.objects.filter(deviceId=int(deviceID)).update(state='landed')
         elif flag=="disagree":
             table_class.objects.filter(lendId=int(id)).update(finished='DISAGREE')
-    elif(table == "discard"):
+    elif table == "discard":
         table_class = Discard
-        if (flag == "agree"):
+        if flag == "agree":
             table_class.objects.filter(discardId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(discardId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(id)).update(state='discarded')
+            Device.objects.filter(deviceId=int(deviceID)).update(state='discarded')
         elif flag == "disagree":
             table_class.objects.filter(discardId=int(id)).update(finished='DISAGREE')
     elif table == "repair":
@@ -271,7 +281,7 @@ def lend_manage(request,table,id,flag):
         if flag == "agree":
             table_class.objects.filter(repairId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(repairId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(id)).update(state='repairing')
+            Device.objects.filter(deviceId=int(deviceID)).update(state='repairing')
             print 1
         elif flag == "disagree":
             table_class.objects.filter(repairId=int(id)).update(finished='DISAGREE')

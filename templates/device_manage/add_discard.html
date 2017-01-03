@@ -9,7 +9,12 @@
           <h1 class="page-header">设备管理-报废申请</h1>
 
           <div class="row placeholders">
-
+{#{% if not user.is_authenticated %}#}
+{#    <script language="javascript">#}
+{#        document.location = "/../accounts/login/";#}
+{#    alert("请先登录");#}
+{#    </script>#}
+{#{% endif %}#}
             <a href="/device-manage/add-repair" > <div class="col-xs-6 col-sm-3 placeholder">
               <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="{% static "repair.png" %}" >
               <h3>提交设备维修</h3>
