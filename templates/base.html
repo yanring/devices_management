@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="http://v3.bootcss.com/assets/css/docs.min.css">
 {#    <link rel="stylesheet" href="../media/marketing.css">#}
     <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css'%}" />
-
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 </head>
 <body>
@@ -22,6 +23,26 @@
         <div class="header">
             <h1 class="brand-title"><a href="{% url "home" %}">Yanring Device Management Sytem</a></h1>
             <h2 class="brand-tagline">设备管理系统</h2>
+{#            <a class="btn btn-info" href="{% url 'users_login' %}">Log in</a>#}
+{#            <a class="btn btn-success btn" href="{% url 'users_register' %}">Register</a>#}
+            <div class="form-group">
+              {% comment %} Login and Register {% endcomment %}
+              {% if user.is_authenticated %}
+                <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">菜单<span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url 'users_password_change' %}">Change Password</a></li>
+                  <li><a href="{% url 'users_logout' %}">Logout</a></li>
+                </ul>
+                {% if user.is_superuser %}<a class="btn btn-success" href="/admin/">管理员控制台</a>{% endif %}
+                </div>
+              {% else %} <!-- Profile -->
+                <a class="btn btn-success btn" href="{% url 'users_register' %}?next={% url 'users_login' %}">Register</a>
+                <a class="btn btn-info" href="{% url 'users_login' %}">Log in</a>
+              {% endif %}
+              </div>
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item">

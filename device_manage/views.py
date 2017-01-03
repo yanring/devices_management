@@ -254,18 +254,24 @@ def lend_manage(request,table,id,flag):
         #print (table_class.objects.all().count())
         if(flag == "agree"):
             table_class.objects.filter(lendId=int(id)).update(finished='YES')
+            deviceID = table_class.objects.get(lendId=int(id)).deviceId
+            Device.objects.filter(deviceId=int(id)).update(state='landed')
         elif flag=="disagree":
             table_class.objects.filter(lendId=int(id)).update(finished='DISAGREE')
     elif(table == "discard"):
         table_class = Discard
         if (flag == "agree"):
             table_class.objects.filter(discardId=int(id)).update(finished='YES')
+            deviceID = table_class.objects.get(discardId=int(id)).deviceId
+            Device.objects.filter(deviceId=int(id)).update(state='discarded')
         elif flag == "disagree":
             table_class.objects.filter(discardId=int(id)).update(finished='DISAGREE')
     elif table == "repair":
         table_class = Repair
         if flag == "agree":
             table_class.objects.filter(repairId=int(id)).update(finished='YES')
+            deviceID = table_class.objects.get(repairId=int(id)).deviceId
+            Device.objects.filter(deviceId=int(id)).update(state='repairing')
             print 1
         elif flag == "disagree":
             table_class.objects.filter(repairId=int(id)).update(finished='DISAGREE')
@@ -273,7 +279,7 @@ def lend_manage(request,table,id,flag):
     #return state_manage(request)
 
 
-class BootStrapTable(tables.Table):
-    class Meta:
-        model = Device
-        attrs = {"class": "table table-hover table-striped"}
+# class BootStrapTable(tables.Table):
+#     class Meta:
+#         model = Device
+#         attrs = {"class": "table table-hover table-striped"}

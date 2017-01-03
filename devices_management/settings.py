@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for devices_management project.
 
@@ -13,6 +14,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import LOGIN_REDIRECT_URL
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -39,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tables2',
+    'bootstrap3',
     'bootstrapform',
+    'users',
 ]
-
+AUTH_USER_MODEL = 'users.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-from django.conf import global_settings
+from django.conf import global_settings, settings
 
 ROOT_URLCONF = 'devices_management.urls'
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
@@ -74,7 +79,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'devices_management.wsgi.application'
 
@@ -127,3 +131,35 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+USERS_REGISTRATION_OPEN = True
+
+USERS_VERIFY_EMAIL = True
+
+USERS_AUTO_LOGIN_ON_ACTIVATION = True
+
+USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
+
+# Specifies minimum length for passwords:
+USERS_PASSWORD_MIN_LENGTH = 5
+
+# Specifies maximum length for passwords:
+USERS_PASSWORD_MAX_LENGTH = None
+
+# the complexity validator, checks the password strength
+USERS_CHECK_PASSWORD_COMPLEXITY = True
+
+USERS_SPAM_PROTECTION = False  # important!
+# LOGIN_REDIRECT_URL ="/../profile"
+LOGIN_REDIRECT_URL ="/.."
+#  ---------------------------------------------------------
+#  Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '303982632@qq.com'
+EMAIL_HOST_PASSWORD = 'nelnupbgxcgwbibj'
+EMAIL_SUBJECT_PREFIX = u'django'  # 为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True  # 与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#  ---------------------------------------------------------
