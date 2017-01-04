@@ -11,9 +11,9 @@ from device_home.models import Device, STATE_CHOICES, Repair, Lend, Discard, PRO
 
 class SearchForm(forms.Form):
     Way = forms.ChoiceField(label='查询方式', choices=PRO_CHOICES, widget=forms.Select(
-        attrs={'class': 'form-control', 'placeholder': "查询方式", 'style': 'width:30%'}))
+        attrs={'class': 'form-control', 'placeholder': "查询方式", 'style': 'width:12%'}))
     Word = forms.CharField(label='关键字', max_length=100, widget=forms.TextInput(
-        attrs={'type': 'text', 'class': 'form-control', 'placeholder': "关键字", 'style': 'width:30%'}))
+        attrs={'type': 'text', 'class': 'form-control', 'placeholder': "关键字", 'style': 'width:50%'}))
 
 
 def index(request):
