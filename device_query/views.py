@@ -1,9 +1,19 @@
+# coding=utf-8
+from django import forms
+
 from django.shortcuts import render
 
 from django.http import HttpResponse
 from django_tables2 import tables
 
-from device_home.models import Device, STATE_CHOICES, Repair, Lend, Discard
+from device_home.models import Device, STATE_CHOICES, Repair, Lend, Discard, PRO_CHOICES
+
+
+class SearchForm(forms.Form):
+    Way = forms.ChoiceField(label='查询方式', choices=PRO_CHOICES, widget=forms.Select(
+        attrs={'class': 'form-control', 'placeholder': "查询方式", 'style': 'width:30%'}))
+    Word = forms.CharField(label='关键字', max_length=100, widget=forms.TextInput(
+        attrs={'type': 'text', 'class': 'form-control', 'placeholder': "关键字", 'style': 'width:30%'}))
 
 
 def index(request):
@@ -26,7 +36,27 @@ def check_lend(request):
 
 
 def check_discard(request):
-    devices = BootStrapTable(Device.objects.filter(state='discard'))
+    if request.method == 'POST':
+        uf = SearchForm(request.POST)
+        if uf.is_valid():
+            way = uf.cleaned_data['Way']
+            word = uf.cleaned_data['Word']
+            if way == 'deviceId':
+                devices = BootStrapTable(Device.objects.filter(deviceId=word, state='discard'))
+            elif way == 'User':
+                devices = BootStrapTable(Device.objects.filter(user=word, state='discard'))
+            elif way == 'deviceName':
+                devices = BootStrapTable(Device.objects.filter(deviceName=word, state='discard'))
+            elif way == 'Department':
+                devices = BootStrapTable(Device.objects.filter(department=word, state='discard'))
+            else:
+                print (way)
+                devices = BootStrapTable(Device.objects.filter(state='discard'))
+        else:
+            devices = BootStrapTable(Device.objects.filter(state='discard'))
+    else:
+        uf = SearchForm()
+        devices = BootStrapTable(Device.objects.filter(state='discard'))
     return render(request, 'device_query/check_discard.html', locals())
 
 

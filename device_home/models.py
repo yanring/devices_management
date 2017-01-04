@@ -72,8 +72,9 @@ STATE_CHOICES = (
 )
 
 PRO_CHOICES = (
-        ('normal', '正常'),
-        ('lend', '借出'),
-        ('discard', '报废'),
-        ('repair', '维修中'),
+        ('deviceId', '设备ID'),
+        ('User', '使用者'),
+        ('State', '状态'),
+        ('deviceName', '设备名'),
+        ('Department', '所属部门'),
 )
