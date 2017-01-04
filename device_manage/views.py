@@ -18,6 +18,10 @@ class AddDeviceForm(forms.Form):
         attrs={'type': 'text', 'class': 'form-control', 'placeholder': "设备名称", 'style': 'width:60%'}))
     Department = forms.CharField(label='所属部门', widget=forms.TextInput(
         attrs={'type': 'text', 'class': 'form-control', 'placeholder': "部门", 'style': 'width:60% '}))
+    Price = forms.CharField(label='价格', widget=forms.TextInput(
+        attrs={'type': 'text', 'class': 'form-control', 'placeholder': "价格", 'style': 'width:60% '}))
+    Source_area = forms.CharField(label='产地', widget=forms.TextInput(
+        attrs={'type': 'text', 'class': 'form-control', 'placeholder': "产地", 'style': 'width:60% '}))
 
 
 class AddRepairForm(forms.Form):
@@ -70,11 +74,13 @@ def add_device(request):
             state = uf.cleaned_data['State']
             deviceName = uf.cleaned_data['DeviceName']
             department = uf.cleaned_data['Department']
+            price = uf.cleaned_data['Price']
+            source_area = uf.cleaned_data['Source_area']
             test = 'test'
             print(user)
             # 添加到数据库
             try:
-                print(Device.objects.create(user=user, state=state, deviceName=deviceName, department=department))
+                print(Device.objects.create(user=user, state=state, deviceName=deviceName, department=department,price = price,source_area=source_area))
                 print("check")
                 success = True
                 print(test)

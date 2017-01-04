@@ -39,14 +39,14 @@
                 </button>
 
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url 'users_password_change' %}">Change Password</a></li>
-                  <li><a href="{% url 'users_logout' %}">Logout</a></li>
+                  <li><a href="{% url 'users_password_change' %}">修改密码</a></li>
+                  <li><a href="{% url 'users_logout' %}">登出</a></li>
                 </ul>
                 {% if user.is_superuser %}<a class="btn btn-success" href="/admin/">管理员控制台</a>{% endif %}
                 </div>
               {% else %} <!-- Profile -->
-                <a class="btn btn-success btn" href="{% url 'users_register' %}?next={% url 'users_login' %}">Register</a>
-                <a class="btn btn-info" href="{% url 'users_login' %}">Log in</a>
+                <a class="btn btn-success btn" href="{% url 'users_register' %}?next={% url 'users_login' %}">注册</a>
+                <a class="btn btn-info" href="{% url 'users_login' %}">登录</a>
               {% endif %}
               </div>
             <nav class="nav">

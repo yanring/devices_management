@@ -34,6 +34,8 @@ def all_device(request):
                 devices = BootStrapTable(Device.objects.filter(deviceName=word))
             elif way == 'Department':
                 devices = BootStrapTable(Device.objects.filter(department=word))
+            elif way == 'State':
+                devices = BootStrapTable(Device.objects.filter(state=word))
             else:
                 devices = BootStrapTable(Device.objects.all())
         else:
