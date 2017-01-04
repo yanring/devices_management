@@ -1,0 +1,66 @@
+<!--home.html-->
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load static %}
+
+{% block content %}
+
+<div class="main">
+  <h1 class="page-header">借用申请列表</h1>
+    {% for lend_request in lend_request_list %}
+        <section class="bs-callout bs-callout-info">
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ lend_request.deviceId }}</a></h3>
+                <h3 ><a href="">LendID : {{ lend_request.lendId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ lend_request.user }}</a>
+                    </p>
+{#            </header>#}
+
+                <div class="post-description">
+                    <p>
+                        Note:{{ lend_request.note }}
+                    </p>
+                </div>
+        </section>
+    {% endfor %}
+    <h1 class="page-header">维修申请列表</h1>
+    {% for request in repair_request_list %}
+        <section class="bs-callout bs-callout-warning">
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">RepairId : {{ request.repairId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                    </p>
+{#            </header>#}
+
+                <div class="post-description">
+                    <p>
+                        Note:{{ request.note }}
+                    </p>
+                </div>
+        </section>
+    {% endfor %}
+<h1 class="page-header">报废申请列表</h1>
+    {% for request in discard_request_list %}
+        <div class="bs-callout bs-callout-danger" >
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">DiscardId : {{ request.DiscardId }}</a></h3>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                    </p>
+{#            </header>#}
+
+                <div class="post-description">
+                    <p>
+                        Note:{{ request.note }}
+                    </p>
+                </div>
+        </div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

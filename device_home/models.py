@@ -70,3 +70,10 @@ STATE_CHOICES = (
         ('discard', '报废'),
         ('repair', '维修中'),
 )
+
+PRO_CHOICES = (
+        ('normal', '正常'),
+        ('lend', '借出'),
+        ('discard', '报废'),
+        ('repair', '维修中'),
+)
