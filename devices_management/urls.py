@@ -30,6 +30,4 @@ urlpatterns = [
     url(r'^accounts/', include('users.urls')),
     url(r'^profile/$', device_home.views.profile),
     url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
-
-
 ]

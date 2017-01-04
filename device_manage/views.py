@@ -265,7 +265,7 @@ def lend_manage(request,table,id,flag):
         if(flag == "agree"):
             table_class.objects.filter(lendId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(lendId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(deviceID)).update(state='landed')
+            Device.objects.filter(deviceId=int(deviceID.deviceId)).update(state='landed')
         elif flag=="disagree":
             table_class.objects.filter(lendId=int(id)).update(finished='DISAGREE')
     elif table == "discard":
@@ -273,7 +273,7 @@ def lend_manage(request,table,id,flag):
         if flag == "agree":
             table_class.objects.filter(discardId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(discardId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(deviceID)).update(state='discarded')
+            Device.objects.filter(deviceId=int(deviceID.deviceId)).update(state='discarded')
         elif flag == "disagree":
             table_class.objects.filter(discardId=int(id)).update(finished='DISAGREE')
     elif table == "repair":
@@ -281,7 +281,8 @@ def lend_manage(request,table,id,flag):
         if flag == "agree":
             table_class.objects.filter(repairId=int(id)).update(finished='YES')
             deviceID = table_class.objects.get(repairId=int(id)).deviceId
-            Device.objects.filter(deviceId=int(deviceID)).update(state='repairing')
+            print deviceID
+            Device.objects.filter(deviceId=deviceID.deviceId).update(state='repairing')
             print 1
         elif flag == "disagree":
             table_class.objects.filter(repairId=int(id)).update(finished='DISAGREE')
