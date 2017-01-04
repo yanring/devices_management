@@ -18,7 +18,8 @@ def detail(request, id):
         post = Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
-    return render_to_response('article/post.html', {'post': post})
+    user = request.user
+    return render_to_response('article/post.html', locals())
 
 
 def home(request):
