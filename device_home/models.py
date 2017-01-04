@@ -20,6 +20,8 @@ class Device(models.Model):
     state = models.CharField(max_length=50)
     deviceName = models.CharField(max_length=50)
     department = models.CharField(max_length=50)
+    price = models.CharField(max_length=50,null=True)
+    source_area = models.CharField(max_length=50,null=True)
 
     # python2使用__unicode__, python3使用__str__
     def __unicode__(self):
@@ -46,6 +48,7 @@ class Lend(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     note = models.CharField(max_length=50)
     finished = models.CharField(max_length=50)
+    return_time = models.DateTimeField(null=True)
 
     # python2使用__unicode__, python3使用__str__
     def __unicode__(self):
