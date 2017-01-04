@@ -264,6 +264,7 @@ def state_manage(request):
     lend_request_list = Lend.objects.filter(finished="NO")
     repair_request_list = Repair.objects.filter(finished="NO")
     discard_request_list = Discard.objects.filter(finished="NO")
+    return_request_list = Lend.objects.filter(return_time=None)
     return render(request, target_url, locals())
 
 
@@ -280,6 +281,14 @@ def lend_manage(request,table,id,flag):
             Device.objects.filter(deviceId=int(deviceID.deviceId)).update(state='landed')
         elif flag=="disagree":
             table_class.objects.filter(lendId=int(id)).update(finished='DISAGREE')
+    elif table == "return":
+        table_class = Lend
+        #print (table_class.objects.all().count())
+        date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        if(flag == "agree"):
+            table_class.objects.filter(lendId=int(id)).update(return_time=date)
+            deviceID = table_class.objects.get(lendId=int(id)).deviceId
+            Device.objects.filter(deviceId=int(deviceID.deviceId)).update(state='normal')
     elif table == "discard":
         table_class = Discard
         if flag == "agree":

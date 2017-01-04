@@ -33,6 +33,25 @@
                 <a name="agree1" onclick="confirm_disagreee()" class="btn btn-danger" href="{% url "lend_manage" table="lend" id=lend_request.lendId flag="disagree" %}">拒绝</a>
         </section>
     {% endfor %}
+<h3 class="page-header">设备归还</h3>
+    {% for return_request in return_request_list %}
+        <section class="bs-callout bs-callout-info">
+{#            <header class="post-header">#}
+                <h3 ><a href="">DeviceID : {{ return_request.deviceId }}</a></h3>
+                <h3 ><a href="">LendID : {{ return_request.lendId }}</a></h3>
+                    <p class="post-meta">
+                        借出时间:  <a class="post-author" href="#">{{ return_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ return_request.user }}</a>
+                    </p>
+{#            </header>#}
+
+                <div class="post-description">
+                    <p>
+                        Note:{{ return_request.note }}
+                    </p>
+                </div>
+                <a name="agree1" onclick="confirm_agreee()"    class="btn btn-success" href="{% url "lend_manage" table="return" id=return_request.lendId flag="agree" %}">归还</a>
+        </section>
+    {% endfor %}
     <h1 class="page-header">处理维修申请</h1>
     {% for request in repair_request_list %}
         <section class="bs-callout bs-callout-warning">
