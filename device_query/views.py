@@ -21,17 +21,74 @@ def index(request):
 
 
 def all_device(request):
-    devices = BootStrapTable(Device.objects.all())
+    if request.method == 'POST':
+        uf = SearchForm(request.POST)
+        if uf.is_valid():
+            way = uf.cleaned_data['Way']
+            word = uf.cleaned_data['Word']
+            if way == 'deviceId':
+                devices = BootStrapTable(Device.objects.filter(deviceId=word))
+            elif way == 'User':
+                devices = BootStrapTable(Device.objects.filter(user=word))
+            elif way == 'deviceName':
+                devices = BootStrapTable(Device.objects.filter(deviceName=word))
+            elif way == 'Department':
+                devices = BootStrapTable(Device.objects.filter(department=word))
+            else:
+                devices = BootStrapTable(Device.objects.all())
+        else:
+            devices = BootStrapTable(Device.objects.all())
+    else:
+        uf = SearchForm()
+        devices = BootStrapTable(Device.objects.all())
     return render(request, 'device_query/query_home2.html', locals())
 
 
 def check_repair(request):
-    devices = BootStrapTable(Device.objects.filter(state='repair'))
+    if request.method == 'POST':
+        uf = SearchForm(request.POST)
+        if uf.is_valid():
+            way = uf.cleaned_data['Way']
+            word = uf.cleaned_data['Word']
+            if way == 'deviceId':
+                devices = BootStrapTable(Device.objects.filter(deviceId=word, state='repair'))
+            elif way == 'User':
+                devices = BootStrapTable(Device.objects.filter(user=word, state='repair'))
+            elif way == 'deviceName':
+                devices = BootStrapTable(Device.objects.filter(deviceName=word, state='repair'))
+            elif way == 'Department':
+                devices = BootStrapTable(Device.objects.filter(department=word, state='repair'))
+            else:
+                devices = BootStrapTable(Device.objects.filter(state='repair'))
+        else:
+            devices = BootStrapTable(Device.objects.filter(state='repair'))
+    else:
+        uf = SearchForm()
+        devices = BootStrapTable(Device.objects.filter(state='repair'))
     return render(request, 'device_query/check_repair.html', locals())
 
 
 def check_lend(request):
-    devices = BootStrapTable(Device.objects.filter(state='lend'))
+    if request.method == 'POST':
+        uf = SearchForm(request.POST)
+        if uf.is_valid():
+            way = uf.cleaned_data['Way']
+            word = uf.cleaned_data['Word']
+            if way == 'deviceId':
+                devices = BootStrapTable(Device.objects.filter(deviceId=word, state='lend'))
+            elif way == 'User':
+                devices = BootStrapTable(Device.objects.filter(user=word, state='lend'))
+            elif way == 'deviceName':
+                devices = BootStrapTable(Device.objects.filter(deviceName=word, state='lend'))
+            elif way == 'Department':
+                devices = BootStrapTable(Device.objects.filter(department=word, state='lend'))
+            else:
+                devices = BootStrapTable(Device.objects.filter(state='lend'))
+        else:
+            devices = BootStrapTable(Device.objects.filter(state='lend'))
+    else:
+        uf = SearchForm()
+        devices = BootStrapTable(Device.objects.filter(state='lend'))
     return render(request, 'device_query/check_lend.html', locals())
 
 
@@ -50,7 +107,6 @@ def check_discard(request):
             elif way == 'Department':
                 devices = BootStrapTable(Device.objects.filter(department=word, state='discard'))
             else:
-                print (way)
                 devices = BootStrapTable(Device.objects.filter(state='discard'))
         else:
             devices = BootStrapTable(Device.objects.filter(state='discard'))
@@ -62,9 +118,9 @@ def check_discard(request):
 
 def state_check(request):
     target_url = 'device_query/state_check.html'
-    lend_request_list = Lend.objects.filter(finished="NO")
-    repair_request_list = Repair.objects.filter(finished="NO")
-    discard_request_list = Discard.objects.filter(finished="NO")
+    lend_request_list = Lend.objects.all()
+    repair_request_list = Repair.objects.all()
+    discard_request_list = Discard.objects.all()
     return render(request, target_url, locals())
 
 

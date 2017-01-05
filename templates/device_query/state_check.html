@@ -12,6 +12,7 @@
 {#            <header class="post-header">#}
                 <h3 ><a href="">DeviceID : {{ lend_request.deviceId }}</a></h3>
                 <h3 ><a href="">LendID : {{ lend_request.lendId }}</a></h3>
+                <h3 ><a href="">处理状态 : {{ lend_request.finished }}</a></h3>
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ lend_request.user }}</a>
                     </p>
@@ -30,6 +31,7 @@
 {#            <header class="post-header">#}
                 <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
                 <h3 ><a href="">RepairId : {{ request.repairId }}</a></h3>
+                <h3 ><a href="">处理状态 : {{ request.finished }}</a></h3>
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
                     </p>
@@ -48,6 +50,7 @@
 {#            <header class="post-header">#}
                 <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
                 <h3 ><a href="">DiscardId : {{ request.DiscardId }}</a></h3>
+                <h3 ><a href="">处理状态 : {{ request.finished }}</a></h3>
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
                     </p>
