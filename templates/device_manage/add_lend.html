@@ -1,6 +1,6 @@
 <!--home.html-->
 {% extends "base.html" %}
-{#{% load render_table from django_tables2 %}#}
+{% load render_table from django_tables2 %}
 {% load static %}
 
 {% block content %}
@@ -51,6 +51,10 @@
                 <button class="btn btn-primary " type="submit" style="width: 20%">提交</button>
             </form>
             <br>
+          <h1 class="page-header">正常设备列表</h1>
+          <div class="table-responsive">
+            {% render_table devices %}
+            </div><!-- /.blog-post -->
 
 </div>
         </div>

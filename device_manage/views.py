@@ -9,13 +9,11 @@ from django_tables2 import tables
 
 from device_home.models import Device, STATE_CHOICES, Repair, Lend, Discard
 
-
 class AddDeviceForm(forms.Form):
     User = forms.CharField(label='使用者姓名', max_length=100, widget=forms.TextInput(
         attrs={'type': 'text', 'class': 'form-control', 'placeholder': "使用者姓名", 'style': 'width:60%'}))
     State = forms.ChoiceField(label='设备状态', choices=STATE_CHOICES, widget=forms.Select(
         attrs={'class': 'form-control', 'placeholder': "设备名称", 'style': 'width:60%'}))
-
     DeviceName = forms.CharField(label='设备名称', widget=forms.TextInput(
         attrs={'type': 'text', 'class': 'form-control', 'placeholder': "设备名称", 'style': 'width:60%'}))
     Department = forms.CharField(label='所属部门', widget=forms.TextInput(
@@ -103,6 +101,7 @@ def add_repair(request):
     target_url = 'device_manage/add_repair.html'
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/../accounts/login/')
+    devices = BootStrapTable(Device.objects.filter(state='normal'))
     if request.method == 'POST':
         uf = AddRepairForm(request.POST)
         login_flag = False
@@ -143,15 +142,16 @@ def add_repair(request):
 
 
         else:
-            return render(request, target_url, {'uf': uf})
+            return render(request, target_url, locals())
     uf = AddRepairForm()
-    return render(request, target_url, {'uf': uf})
+    return render(request, target_url, locals())
 
 
 def add_lend(request):
     target_url = 'device_manage/add_lend.html'
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/../accounts/login/')
+    devices = BootStrapTable(Device.objects.filter(state='normal'))
     if request.method == 'POST':
         uf = AddLendForm(request.POST)
 
@@ -180,6 +180,7 @@ def add_lend(request):
                 success = True
                 print(test)
                 test = 'test2'
+                devices = BootStrapTable(Device.objects.filter(state='normal'))
                 return render(request, target_url, locals())
             except Exception as e:
                 login_flag = False
@@ -187,21 +188,24 @@ def add_lend(request):
                 print(e)
                 test = 'test'
                 error_info = e
-                return render(request, target_url,
-                              {'uf': uf, 'error': error, 'error_info': error_info, 'test': test})
+                devices = BootStrapTable(Device.objects.filter(state='normal'))
+                return render(request, target_url, locals())
 
 
 
         else:
-            return render(request, target_url, {'uf': uf})
+            devices = BootStrapTable(Device.objects.filter(state='normal'))
+            return render(request, target_url, locals())
     uf = AddLendForm()
-    return render(request, target_url, {'uf': uf})
+    devices = BootStrapTable(Device.objects.filter(state='normal'))
+    return render(request, target_url, locals())
 
 
 def add_discard(request):
     target_url = 'device_manage/add_discard.html'
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/../accounts/login/')
+    devices = BootStrapTable(Device.objects.filter(state='normal'))
     if request.method == 'POST':
 
         uf = AddDiscardForm(request.POST)
@@ -242,9 +246,11 @@ def add_discard(request):
 
 
         else:
-            return render(request, target_url, {'uf': uf})
+            devices = BootStrapTable(Device.objects.filter(state='normal'))
+            return render(request, target_url, locals())
     uf = AddDiscardForm()
-    return render(request, target_url, {'uf': uf})
+    devices = BootStrapTable(Device.objects.filter(state='normal'))
+    return render(request, target_url, locals())
 
 
 def state_manage(request):
@@ -290,7 +296,7 @@ def lend_manage(request,table,id,flag):
     #return state_manage(request)
 
 
-# class BootStrapTable(tables.Table):
-#     class Meta:
-#         model = Device
-#         attrs = {"class": "table table-hover table-striped"}
+class BootStrapTable(tables.Table):
+    class Meta:
+        model = Device
+        attrs = {"class": "table table-hover table-striped"}
