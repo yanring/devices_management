@@ -21,7 +21,7 @@
                 <h3 ><a href="">设备序列号 : {{ lend_request.deviceId }}</a></h3>
                 <h3 ><a href="">借出单号 : {{ lend_request.lendId }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ lend_request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">借用人员 : {{ lend_request.user }}</a>
                     </p>
 {#            </header>#}
 
@@ -41,7 +41,7 @@
                 <h3 ><a href="">设备序列号 : {{ return_request.deviceId }}</a></h3>
                 <h3 ><a href="">借出单号 : {{ return_request.lendId }}</a></h3>
                     <p class="post-meta">
-                        借出时间:  <a class="post-author" href="#">{{ return_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ return_request.user }}</a>
+                        借出时间:  <a class="post-author" href="#">{{ return_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">借用人员 : {{ return_request.user }}</a>
                     </p>
 {#            </header>#}
 
@@ -60,7 +60,7 @@
                 <h3 ><a href="">设备序列号 : {{ request.deviceId }}</a></h3>
                 <h3 ><a href="">维修单号 : {{ request.repairId }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">使用人员 : {{ request.user }}</a>
                     </p>
 {#            </header>#}
 
@@ -80,7 +80,7 @@
                 <h3 ><a href="">设备序列号 : {{ request.deviceId }}</a></h3>
                 <h3 ><a href="">报废单号 : {{ request.DiscardId }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">使用人员 : {{ request.user }}</a>
                     </p>
 {#            </header>#}
 

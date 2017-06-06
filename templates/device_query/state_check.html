@@ -10,11 +10,11 @@
     {% for lend_request in lend_request_list %}
         <section class="bs-callout bs-callout-info">
 {#            <header class="post-header">#}
-                <h3 ><a href="">DeviceID : {{ lend_request.deviceId }}</a></h3>
-                <h3 ><a href="">LendID : {{ lend_request.lendId }}</a></h3>
+                <h3 ><a href="">设备序列号 : {{ lend_request.deviceId }}</a></h3>
+                <h3 ><a href="">借出单号 : {{ lend_request.lendId }}</a></h3>
                 <h3 ><a href="">处理状态 : {{ lend_request.finished }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ lend_request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ lend_request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">借用人员 : {{ lend_request.user }}</a>
                     </p>
 {#            </header>#}
 
@@ -29,11 +29,11 @@
     {% for request in repair_request_list %}
         <section class="bs-callout bs-callout-warning">
 {#            <header class="post-header">#}
-                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
-                <h3 ><a href="">RepairId : {{ request.repairId }}</a></h3>
+                <h3 ><a href="">设备序列号 : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">维修单号 : {{ request.repairId }}</a></h3>
                 <h3 ><a href="">处理状态 : {{ request.finished }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">使用人员 : {{ request.user }}</a>
                     </p>
 {#            </header>#}
 
@@ -48,11 +48,11 @@
     {% for request in discard_request_list %}
         <div class="bs-callout bs-callout-danger" >
 {#            <header class="post-header">#}
-                <h3 ><a href="">DeviceID : {{ request.deviceId }}</a></h3>
-                <h3 ><a href="">DiscardId : {{ request.DiscardId }}</a></h3>
+                <h3 ><a href="">设备序列号 : {{ request.deviceId }}</a></h3>
+                <h3 ><a href="">报废单号 : {{ request.DiscardId }}</a></h3>
                 <h3 ><a href="">处理状态 : {{ request.finished }}</a></h3>
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">User Name : {{ request.user }}</a>
+                        Time:  <a class="post-author" href="#">{{ request.date |date:"Y /m /d H:i:s"}}</a> <a class="post-category post-category-js" href="#">使用人员 : {{ request.user }}</a>
                     </p>
 {#            </header>#}
 
