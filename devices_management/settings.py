@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+#
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.conf.global_settings import LOGIN_REDIRECT_URL
 
@@ -153,7 +153,7 @@ USERS_PASSWORD_MAX_LENGTH = None
 
 # the complexity validator, checks the password strength
 USERS_CHECK_PASSWORD_COMPLEXITY = True
-
+ALLOWED_HOSTS = ['*']
 USERS_SPAM_PROTECTION = False  # important!
 # LOGIN_REDIRECT_URL ="/../profile"
 LOGIN_REDIRECT_URL ="/.."

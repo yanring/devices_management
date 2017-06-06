@@ -12,7 +12,7 @@ class User(models.Model):
     def __unicode__(self):
         return self.username
 
-
+        # modify
 # Create your models here.
 class Device(models.Model):
     deviceId = models.AutoField(max_length=20, primary_key=True)

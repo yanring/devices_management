@@ -1,6 +1,6 @@
 #coding=utf-8
 from django.db import models
-
+# modify
 # Create your models here.
 class Article(models.Model) :
     title = models.CharField(max_length = 100)  #博客题目

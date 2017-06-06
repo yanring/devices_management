@@ -21,7 +21,7 @@ import article.views
 import device_home.views
 from device_query import views
 from devices_management import settings
-
+# modify
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^device-query/', include('device_query.urls')),
